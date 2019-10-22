@@ -47,7 +47,8 @@ router.get('/getData', (req, res) => {
 // http://localhost:3001/api/updateData
 router.post('/updateData', (req, res) => {
   const { id, update } = req.body;
-  Data.updateOne(id, update, (err) => {
+
+  Data.updateOne({ "id": id, "message": update }, (err) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
   });
@@ -58,7 +59,8 @@ router.post('/updateData', (req, res) => {
 // http://localhost:3001/api/deleteData
 router.delete('/deleteData', (req, res) => {
   const { id } = req.body;
-  Data.deleteOne(id, (err) => {
+
+  Data.deleteOne({ id }, (err) => {
     if (err) return res.send(err);
     return res.json({ success: true });
   });
@@ -67,7 +69,7 @@ router.delete('/deleteData', (req, res) => {
 // this is our create methid
 // this method adds new data in our database
 // http://localhost:3001/api/putData
-router.post('/putData', (req, res) => {
+router.put('/putData', (req, res) => {
   let data = new Data();
 
   const { id, message } = req.body;
