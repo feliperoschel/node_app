@@ -34,6 +34,7 @@ app.use(logger('dev'));
 
 // this is our get method
 // this method fetches all available data in our database
+// http://localhost:3001/api/getData
 router.get('/getData', (req, res) => {
   Data.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
@@ -43,6 +44,7 @@ router.get('/getData', (req, res) => {
 
 // this is our update method
 // this method overwrites existing data in our database
+// http://localhost:3001/api/updateData
 router.post('/updateData', (req, res) => {
   const { id, update } = req.body;
   Data.updateOne(id, update, (err) => {
@@ -53,6 +55,7 @@ router.post('/updateData', (req, res) => {
 
 // this is our delete method
 // this method removes existing data in our database
+// http://localhost:3001/api/deleteData
 router.delete('/deleteData', (req, res) => {
   const { id } = req.body;
   Data.deleteOne(id, (err) => {
@@ -63,6 +66,7 @@ router.delete('/deleteData', (req, res) => {
 
 // this is our create methid
 // this method adds new data in our database
+// http://localhost:3001/api/putData
 router.post('/putData', (req, res) => {
   let data = new Data();
 
