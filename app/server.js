@@ -10,8 +10,8 @@ const app = express();
 app.use(cors());
 const router = express.Router();
 
-// import environmental variables from our variables.env file
-require('dotenv').config({ path: 'env.local' });
+// import environmental variables from our variables .env.local file
+require('dotenv').config({ path: '../.env.local' });
 
 // this is our MongoDB database
 const dbRoute = (process.env.DATABASE);
