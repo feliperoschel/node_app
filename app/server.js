@@ -88,6 +88,56 @@ router.put('/putData', (req, res) => {
   });
 });
 
+
+
+// this is our get method
+// this method fetches all available data in our database
+// http://localhost:3001/api/getData
+router.get('/getDataGcp', (req, res) => {
+
+
+  // GOOGLE GCP VISION
+
+  // Imports the Google Cloud client library
+  const vision = require('@google-cloud/vision');
+
+  // Creates a client
+  const client = new vision.ProductSearchClient();
+
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  const projectId = 'sy-inlab';
+  const location = 'us-central1-f';
+  const productSetId = '0';
+  const productSetDisplayName = 'product set test id 0';
+
+  // // Resource path that represents Google Cloud Platform location.
+  const locationPath = client.locationPath(projectId, location);
+
+  const productSet = {
+    displayName: productSetDisplayName,
+  };
+
+  const request = {
+    parent: locationPath,
+    productSet: productSet,
+    productSetId: productSetId,
+  };
+
+
+  const [createdProductSet] = async() => {
+    await client.createProductSet(request);
+  }
+
+  // const [createdProductSet] = await client.createProductSet(request);
+  // console.log(`Product Set name: ${createdProductSet.name}`);
+
+  return res.json({ success: true, productSet: [createdProductSet] });
+
+});
+
+
 // append /api for our http requests
 app.use('/api', router);
 
